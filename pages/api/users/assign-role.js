@@ -1,5 +1,5 @@
 import { PrismaClient } from '@prisma/client';
-import { verifyAdmin } from '../../utils/auth';
+import { verifyAdmin } from '../../../utils/auth';
 
 const prisma = new PrismaClient();
 
