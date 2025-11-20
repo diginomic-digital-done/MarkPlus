@@ -34,7 +34,9 @@ export default function DashboardLayout({ children }) {
     <div className="flex min-h-screen">
       {/* Left Menu */}
       <aside className="w-64 bg-gray-800 text-white flex flex-col">
-        <div className="p-4 text-2xl font-bold border-b border-gray-700">Admin Dashboard</div>
+        <div className="p-4 border-b border-gray-700 flex items-center justify-center">
+          <img src="/logo.png" alt="Logo" className="h-12 w-auto" />
+        </div>
         <nav className="flex-1 p-4 space-y-2">
           <Link href="/backend/dashboard" legacyBehavior>
             <a className="block px-4 py-2 rounded hover:bg-gray-700">Dashboard</a>
@@ -119,6 +121,48 @@ export default function DashboardLayout({ children }) {
                 </Link>
                 <Link href="/backend/variationoptions" legacyBehavior>
                   <a className="block px-4 py-2 rounded hover:bg-gray-700">View All</a>
+                </Link>
+              </div>
+            )}
+          </div>
+
+          {/* Variation Types Menu */}
+          <div>
+            <button
+              onClick={() => setActiveMenu(activeMenu === 'variationtypes' ? '' : 'variationtypes')}
+              className="flex items-center justify-between w-full text-left px-4 py-2 rounded hover:bg-gray-700 focus:outline-none"
+            >
+              <span>Variation Types</span>
+              {activeMenu === 'variationtypes' ? <FaChevronUp /> : <FaChevronDown />}
+            </button>
+            {activeMenu === 'variationtypes' && (
+              <div className="ml-4 space-y-2">
+                <Link href="/backend/variationtypes" legacyBehavior>
+                  <a className="block px-4 py-2 rounded hover:bg-gray-700">Manage Types</a>
+                </Link>
+              </div>
+            )}
+          </div>
+
+          {/* Settings Menu */}
+          <div>
+            <button
+              onClick={() => setActiveMenu(activeMenu === 'settings' ? '' : 'settings')}
+              className="flex items-center justify-between w-full text-left px-4 py-2 rounded hover:bg-gray-700 focus:outline-none"
+            >
+              <span>Settings</span>
+              {activeMenu === 'settings' ? <FaChevronUp /> : <FaChevronDown />}
+            </button>
+            {activeMenu === 'settings' && (
+              <div className="ml-4 space-y-2">
+                <Link href="/backend/settings/general" legacyBehavior>
+                  <a className="block px-4 py-2 rounded hover:bg-gray-700">General Settings</a>
+                </Link>
+                <Link href="/backend/settings/contact" legacyBehavior>
+                  <a className="block px-4 py-2 rounded hover:bg-gray-700">Contact Info</a>
+                </Link>
+                <Link href="/backend/settings/social" legacyBehavior>
+                  <a className="block px-4 py-2 rounded hover:bg-gray-700">Social Links</a>
                 </Link>
               </div>
             )}

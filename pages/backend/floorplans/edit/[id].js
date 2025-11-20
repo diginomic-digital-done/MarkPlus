@@ -63,6 +63,9 @@ export default function EditFloorPlan() {
     floorPlanUrl: '',
     status: 'Active',
     pdfPagesOverride: [],
+    bedrooms: '',
+    bathrooms: '',
+    carSpaces: '',
   });
   const [heroImagePreview, setHeroImagePreview] = useState(null);
   const [galleryPreviews, setGalleryPreviews] = useState([]);
@@ -150,6 +153,45 @@ export default function EditFloorPlan() {
                 id="title"
                 value={floorPlan.title}
                 onChange={(e) => setFloorPlan({ ...floorPlan, title: e.target.value })}
+                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500"
+                required
+              />
+            </div>
+            {/* Bedrooms */}
+            <div className="form-group">
+              <label htmlFor="bedrooms" className="block text-sm font-medium text-gray-700">Bedrooms</label>
+              <input
+                type="number"
+                name="bedrooms"
+                id="bedrooms"
+                value={floorPlan.bedrooms}
+                onChange={(e) => setFloorPlan({ ...floorPlan, bedrooms: e.target.value })}
+                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500"
+                required
+              />
+            </div>
+            {/* Bathrooms */}
+            <div className="form-group">
+              <label htmlFor="bathrooms" className="block text-sm font-medium text-gray-700">Bathrooms</label>
+              <input
+                type="number"
+                name="bathrooms"
+                id="bathrooms"
+                value={floorPlan.bathrooms}
+                onChange={(e) => setFloorPlan({ ...floorPlan, bathrooms: e.target.value })}
+                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500"
+                required
+              />
+            </div>
+            {/* Car Spaces */}
+            <div className="form-group">
+              <label htmlFor="carSpaces" className="block text-sm font-medium text-gray-700">Car Spaces</label>
+              <input
+                type="number"
+                name="carSpaces"
+                id="carSpaces"
+                value={floorPlan.carSpaces}
+                onChange={(e) => setFloorPlan({ ...floorPlan, carSpaces: e.target.value })}
                 className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500"
                 required
               />

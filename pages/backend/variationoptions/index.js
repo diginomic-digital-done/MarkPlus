@@ -32,7 +32,11 @@ export default function VariationOptions() {
     if (!confirmDelete) return;
 
     try {
-      await fetch(`/api/variationoptions/${id}`, { method: 'DELETE' });
+      await fetch('/api/variationoptions', {
+        method: 'DELETE',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id }),
+      });
       setVariationOptions((prev) => prev.filter((option) => option.id !== id));
     } catch (error) {
       console.error('Error deleting variation option:', error);
@@ -61,7 +65,7 @@ export default function VariationOptions() {
           <tbody>
             {variationOptions.map((option) => (
               <tr key={option.id} className="border-b">
-                <td className="p-2">{option.type}</td>
+                <td className="p-2">{option.variationType ? (option.variationType.label || option.variationType.name) : ''}</td>
                 <td className="p-2">{option.label}</td>
                 <td className="p-2">{option.isActive ? 'Yes' : 'No'}</td>
                 <td className="p-2">

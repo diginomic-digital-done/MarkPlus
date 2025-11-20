@@ -4,8 +4,7 @@ generator client {
 
 datasource db {
   provider = "postgresql" // Replace with your database provider (e.g., mysql, sqlite, etc.)
-  url      = env("DATABASE_URL")
-  shadowDatabaseUrl = env("SHADOW_DATABASE_URL")
+  url      = env("DATABASE_URL") 
 }
 
 model Role {
@@ -49,6 +48,7 @@ model Region {
   state     State    @relation(fields: [stateId], references: [id])
   floorPlans FloorPlan[]
   pdfStaticPages String[] // Ordered list of static PDF page file URLs/paths
+  pdfRequests PDFRequest[]
 }
 
 model FloorPlan {
@@ -60,6 +60,9 @@ model FloorPlan {
   areaLiving      Int?
   areaTotal       Int?
   basePrice       Float
+  bedrooms        Int?
+  bathrooms       Int?
+  carSpaces       Int?
   heroImage       String?
   gallery         String[]
   brochurePdf     String?
@@ -70,26 +73,47 @@ model FloorPlan {
   pdfRequests PDFRequest[]
 }
 
+
+model VariationType {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
+  label       String
+  isActive    Boolean  @default(true)
+  variationOptions VariationOption[]
+}
+
 model VariationOption {
   id          Int      @id @default(autoincrement())
   floorPlanId Int
   floorPlan   FloorPlan @relation(fields: [floorPlanId], references: [id])
-  type        String
+  variationTypeId Int
+  variationType VariationType @relation(fields: [variationTypeId], references: [id])
   label       String
   description String?
   image       String?
+  staffImage  String?
+  icon        String? // icon/image for frontend display
   priceDelta  Float?
+  staffPriceDelta Float?
   isActive    Boolean  @default(true)
   order       Int?
 }
 
+enum TriggeredBy {
+  USER
+  STAFF
+  SYSTEM
+}
+
 model PDFRequest {
-  id              Int      @id @default(autoincrement())
-  triggeredBy     String
+  id              String   @id @default(uuid())
+  triggeredBy     TriggeredBy
   userId          Int?
   user            User?    @relation(fields: [userId], references: [id])
-  stateId        Int
-  state          State   @relation(fields: [stateId], references: [id])
+  stateId         Int
+  state           State    @relation(fields: [stateId], references: [id])
+  regionId        Int
+  region          Region   @relation(fields: [regionId], references: [id])
   floorPlanId     Int
   floorPlan       FloorPlan @relation(fields: [floorPlanId], references: [id])
   selectedOptions Json

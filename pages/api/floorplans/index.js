@@ -65,6 +65,9 @@ export default async function handler(req, res) {
             floorPlanUrl,
             status,
             pdfPagesOverride,
+            bedrooms: req.body.bedrooms !== undefined && req.body.bedrooms !== null ? parseInt(req.body.bedrooms) : null,
+            bathrooms: req.body.bathrooms !== undefined && req.body.bathrooms !== null ? parseInt(req.body.bathrooms) : null,
+            carSpaces: req.body.carSpaces !== undefined && req.body.carSpaces !== null ? parseInt(req.body.carSpaces) : null,
           },
         });
 
@@ -82,6 +85,33 @@ export default async function handler(req, res) {
         const updatedFloorPlan = await prisma.floorPlan.update({
           where: { id },
           data: { name, regionId, isActive },
+        });
+        res.status(200).json(updatedFloorPlan);
+      } catch (error) {
+        res.status(500).json({ error: 'Failed to update floor plan' });
+      }
+      break;
+      try {
+        const { id, title, regionId, frontage, areaLiving, areaTotal, basePrice, heroImage, gallery, brochurePdf, floorPlanUrl, status, pdfPagesOverride, bedrooms, bathrooms, carSpaces } = req.body;
+        const updatedFloorPlan = await prisma.floorPlan.update({
+          where: { id },
+          data: {
+            title,
+            regionId: regionId ? parseInt(regionId) : undefined,
+            frontage: frontage !== undefined && frontage !== null ? parseFloat(frontage) : undefined,
+            areaLiving: areaLiving !== undefined && areaLiving !== null ? parseInt(areaLiving) : undefined,
+            areaTotal: areaTotal !== undefined && areaTotal !== null ? parseInt(areaTotal) : undefined,
+            basePrice: basePrice !== undefined && basePrice !== null ? parseFloat(basePrice) : undefined,
+            heroImage,
+            gallery,
+            brochurePdf,
+            floorPlanUrl,
+            status,
+            pdfPagesOverride,
+            bedrooms: bedrooms !== undefined && bedrooms !== null ? parseInt(bedrooms) : null,
+            bathrooms: bathrooms !== undefined && bathrooms !== null ? parseInt(bathrooms) : null,
+            carSpaces: carSpaces !== undefined && carSpaces !== null ? parseInt(carSpaces) : null,
+          },
         });
         res.status(200).json(updatedFloorPlan);
       } catch (error) {

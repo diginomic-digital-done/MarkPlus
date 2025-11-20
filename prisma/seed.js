@@ -55,6 +55,27 @@ async function main() {
     }),
   ]);
   console.log(`${users.length} users ensured.`);
+
+  // Seed initial VariationTypes
+  const types = [
+    { name: 'ELEVATION', label: 'Elevation', isActive: true },
+    { name: 'LIVING_AREA', label: 'Living Area', isActive: true },
+    { name: 'MASTER_SUITE', label: 'Master Suite', isActive: true },
+    { name: 'FAMILY_WING', label: 'Family Wing', isActive: true }
+  ];
+
+  async function seedVariationTypes() {
+    for (const type of types) {
+      await prisma.variationType.upsert({
+        where: { name: type.name },
+        update: type,
+        create: type
+      });
+    }
+    console.log('Variation types seeded.');
+  }
+
+  return seedVariationTypes();
 }
 
 main()

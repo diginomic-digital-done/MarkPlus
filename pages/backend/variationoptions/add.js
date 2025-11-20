@@ -1,25 +1,92 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import DashboardLayout from '../dashboard/layout';
 
 export default function AddVariationOption() {
   const [formData, setFormData] = useState({
-    type: '',
+    variationTypeId: '',
     label: '',
     description: '',
     image: '',
+    staffImage: '',
     priceDelta: '',
+    staffPriceDelta: '',
     isActive: true,
     order: '',
     floorPlanId: '',
   });
+  const [imageFile, setImageFile] = useState(null);
+  const [staffImageFile, setStaffImageFile] = useState(null);
+  const [floorPlans, setFloorPlans] = useState([]);
+  const [variationTypes, setVariationTypes] = useState([]);
+  const [errors, setErrors] = useState({});
+
+  // Fetch available floorplans for dropdown
+  useEffect(() => {
+    async function fetchFloorPlans() {
+      try {
+        const response = await fetch('/api/floorplans');
+        const data = await response.json();
+        setFloorPlans(Array.isArray(data) ? data : []);
+      } catch {
+        setFloorPlans([]);
+      }
+    }
+    async function fetchVariationTypes() {
+      try {
+        const response = await fetch('/api/variationtypes');
+        const data = await response.json();
+        setVariationTypes(Array.isArray(data) ? data : []);
+      } catch {
+        setVariationTypes([]);
+      }
+    }
+    fetchFloorPlans();
+    fetchVariationTypes();
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    // Validation
+    const newErrors = {};
+  if (!formData.variationTypeId) newErrors.variationTypeId = 'Type is required.';
+    if (!formData.label) newErrors.label = 'Label is required.';
+    if (!formData.floorPlanId) newErrors.floorPlanId = 'Floor Plan is required.';
+    if (formData.priceDelta && isNaN(Number(formData.priceDelta))) newErrors.priceDelta = 'Price Delta must be a number.';
+    if (formData.order && isNaN(Number(formData.order))) newErrors.order = 'Order must be a number.';
+    setErrors(newErrors);
+    if (Object.keys(newErrors).length > 0) return;
 
+    let imageUrl = formData.image;
+    if (imageFile) {
+      const imgForm = new FormData();
+      imgForm.append('files', imageFile);
+      const res = await fetch('/api/upload', { method: 'POST', body: imgForm });
+      const data = await res.json();
+      imageUrl = data.files?.[0]?.url || '';
+    }
+    let staffImageUrl = formData.staffImage;
+    if (staffImageFile) {
+      const imgForm = new FormData();
+      imgForm.append('files', staffImageFile);
+      const res = await fetch('/api/upload', { method: 'POST', body: imgForm });
+      const data = await res.json();
+      staffImageUrl = data.files?.[0]?.url || '';
+    }
+
+    const submitData = {
+      ...formData,
+      image: imageUrl,
+      staffImage: staffImageUrl,
+      variationTypeId: formData.variationTypeId ? Number(formData.variationTypeId) : undefined,
+      floorPlanId: formData.floorPlanId ? Number(formData.floorPlanId) : undefined,
+      order: formData.order ? Number(formData.order) : undefined,
+      priceDelta: formData.priceDelta ? Number(formData.priceDelta) : undefined,
+      staffPriceDelta: formData.staffPriceDelta ? Number(formData.staffPriceDelta) : undefined,
+    };
     const response = await fetch('/api/variationoptions', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData),
+      body: JSON.stringify(submitData),
     });
     if (response.ok) {
       alert('Variation Option created successfully!');
@@ -33,6 +100,8 @@ export default function AddVariationOption() {
         order: '',
         floorPlanId: '',
       });
+      setImageFile(null);
+      setErrors({});
     } else {
       alert('Failed to create Variation Option.');
     }
@@ -43,33 +112,66 @@ export default function AddVariationOption() {
       <div className="p-6 bg-gray-100 min-h-screen">
         <h1 className="text-2xl font-bold mb-4">Add New Variation Option</h1>
         <form onSubmit={handleSubmit} className="space-y-4">
+          <label className="block text-sm font-medium text-gray-700">Staff Image</label>
           <input
-            type="text"
-            placeholder="Type"
-            value={formData.type}
-            onChange={(e) => setFormData({ ...formData, type: e.target.value })}
+            type="file"
+            accept="image/*"
+            onChange={e => setStaffImageFile(e.target.files[0])}
             className="border border-gray-300 p-2 rounded w-full"
           />
+          {formData.staffImage && !staffImageFile && (
+            <img src={formData.staffImage} alt="Staff Preview" className="mt-2 h-16" />
+          )}
+          <label className="block text-sm font-medium text-gray-700">Staff Price Delta</label>
+          <input
+            type="number"
+            placeholder="Staff Price Delta"
+            value={formData.staffPriceDelta}
+            onChange={(e) => setFormData({ ...formData, staffPriceDelta: e.target.value })}
+            className="border border-gray-300 p-2 rounded w-full"
+          />
+          <label className="block text-sm font-medium text-gray-700">Type*</label>
+          <select
+            value={formData.variationTypeId}
+            onChange={e => setFormData({ ...formData, variationTypeId: e.target.value })}
+            className="border border-gray-300 p-2 rounded w-full"
+            required
+          >
+            <option value="">Select Type*</option>
+            {variationTypes.map(type => (
+              <option key={type.id} value={type.id}>{type.label || type.name}</option>
+            ))}
+          </select>
+          {errors.variationTypeId && <div className="text-red-500 text-sm">{errors.variationTypeId}</div>}
+          <label className="block text-sm font-medium text-gray-700">Label*</label>
           <input
             type="text"
-            placeholder="Label"
+            placeholder="Label*"
             value={formData.label}
             onChange={(e) => setFormData({ ...formData, label: e.target.value })}
             className="border border-gray-300 p-2 rounded w-full"
           />
+          {errors.label && <div className="text-red-500 text-sm">{errors.label}</div>}
+          <label className="block text-sm font-medium text-gray-700">Description</label>
           <textarea
             placeholder="Description"
             value={formData.description}
             onChange={(e) => setFormData({ ...formData, description: e.target.value })}
             className="border border-gray-300 p-2 rounded w-full"
           />
-          <input
-            type="text"
-            placeholder="Image URL"
-            value={formData.image}
-            onChange={(e) => setFormData({ ...formData, image: e.target.value })}
-            className="border border-gray-300 p-2 rounded w-full"
-          />
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Image Upload</label>
+            <input
+              type="file"
+              accept="image/*"
+              onChange={e => setImageFile(e.target.files[0])}
+              className="border border-gray-300 p-2 rounded w-full"
+            />
+            {formData.image && !imageFile && (
+              <img src={formData.image} alt="Preview" className="mt-2 h-16" />
+            )}
+          </div>
+          <label className="block text-sm font-medium text-gray-700">Price Delta</label>
           <input
             type="number"
             placeholder="Price Delta"
@@ -77,8 +179,9 @@ export default function AddVariationOption() {
             onChange={(e) => setFormData({ ...formData, priceDelta: e.target.value })}
             className="border border-gray-300 p-2 rounded w-full"
           />
+          {errors.priceDelta && <div className="text-red-500 text-sm">{errors.priceDelta}</div>}
           <div className="flex items-center space-x-2">
-            <label className="text-gray-700">Active:</label>
+            <label className="text-gray-700">Active</label>
             <input
               type="checkbox"
               checked={formData.isActive}
@@ -86,6 +189,7 @@ export default function AddVariationOption() {
               className="border border-gray-300 p-2 rounded"
             />
           </div>
+          <label className="block text-sm font-medium text-gray-700">Order</label>
           <input
             type="number"
             placeholder="Order"
@@ -93,13 +197,20 @@ export default function AddVariationOption() {
             onChange={(e) => setFormData({ ...formData, order: e.target.value })}
             className="border border-gray-300 p-2 rounded w-full"
           />
-          <input
-            type="text"
-            placeholder="Floor Plan ID"
+          {errors.order && <div className="text-red-500 text-sm">{errors.order}</div>}
+          <label className="block text-sm font-medium text-gray-700">Floor Plan*</label>
+          <select
             value={formData.floorPlanId}
-            onChange={(e) => setFormData({ ...formData, floorPlanId: e.target.value })}
+            onChange={e => setFormData({ ...formData, floorPlanId: e.target.value })}
             className="border border-gray-300 p-2 rounded w-full"
-          />
+            required
+          >
+            <option value="">Select Floor Plan*</option>
+            {floorPlans.map(fp => (
+              <option key={fp.id} value={fp.id}>{fp.title}</option>
+            ))}
+          </select>
+          {errors.floorPlanId && <div className="text-red-500 text-sm">{errors.floorPlanId}</div>}
           <button type="submit" className="bg-blue-500 text-white px-4 py-2 rounded">
             Create Variation Option
           </button>

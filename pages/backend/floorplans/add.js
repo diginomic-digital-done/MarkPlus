@@ -220,6 +220,9 @@ export default function AddFloorPlan() {
     floorPlanUrl: "",
     status: "Active",
     pdfPagesOverride: [],
+    bedrooms: "",
+    bathrooms: "",
+    carSpaces: "",
   });
   const [heroImagePreview, setHeroImagePreview] = useState(null); // State for hero image preview
   const [galleryPreviews, setGalleryPreviews] = useState([]); // State for gallery image previews
@@ -344,12 +347,7 @@ console.log('Current regionId:', formData.regionId);
           <h2 className="text-2xl font-bold mb-4">Add New Floor Plan</h2>
           <form className="space-y-6" onSubmit={handleSubmit}>
             <div className="form-group">
-              <label
-                htmlFor="title"
-                className="block text-sm font-medium text-gray-700"
-              >
-                Title of the Floor Plan
-              </label>
+              <label htmlFor="title" className="block text-sm font-medium text-gray-700">Title of the Floor Plan</label>
               <input
                 type="text"
                 name="title"
@@ -358,6 +356,42 @@ console.log('Current regionId:', formData.regionId);
                 required
                 value={formData.title}
                 onChange={e => setFormData(prev => ({ ...prev, title: e.target.value }))}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="bedrooms" className="block text-sm font-medium text-gray-700">Bedrooms</label>
+              <input
+                type="number"
+                name="bedrooms"
+                id="bedrooms"
+                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500"
+                required
+                value={formData.bedrooms}
+                onChange={e => setFormData(prev => ({ ...prev, bedrooms: e.target.value }))}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="bathrooms" className="block text-sm font-medium text-gray-700">Bathrooms</label>
+              <input
+                type="number"
+                name="bathrooms"
+                id="bathrooms"
+                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500"
+                required
+                value={formData.bathrooms}
+                onChange={e => setFormData(prev => ({ ...prev, bathrooms: e.target.value }))}
+              />
+            </div>
+            <div className="form-group">
+              <label htmlFor="carSpaces" className="block text-sm font-medium text-gray-700">Car Spaces</label>
+              <input
+                type="number"
+                name="carSpaces"
+                id="carSpaces"
+                className="mt-1 block w-full border border-gray-300 rounded-md shadow-sm p-2 focus:ring-blue-500 focus:border-blue-500"
+                required
+                value={formData.carSpaces}
+                onChange={e => setFormData(prev => ({ ...prev, carSpaces: e.target.value }))}
               />
             </div>
             <div className="form-group">

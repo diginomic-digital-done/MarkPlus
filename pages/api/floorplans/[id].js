@@ -36,6 +36,9 @@ export default async function handler(req, res) {
           floorPlanUrl,
           status,
           pdfPagesOverride,
+          bedrooms,
+          bathrooms,
+          carSpaces,
         } = req.body;
 
         // Ensure correct types and handle empty arrays
@@ -52,6 +55,9 @@ export default async function handler(req, res) {
           floorPlanUrl,
           status,
           pdfPagesOverride: Array.isArray(pdfPagesOverride) ? pdfPagesOverride : [],
+          bedrooms: bedrooms !== undefined && bedrooms !== null ? parseInt(bedrooms) : null,
+          bathrooms: bathrooms !== undefined && bathrooms !== null ? parseInt(bathrooms) : null,
+          carSpaces: carSpaces !== undefined && carSpaces !== null ? parseInt(carSpaces) : null,
         };
 
         const updatedFloorPlan = await prisma.floorPlan.update({
@@ -63,8 +69,7 @@ export default async function handler(req, res) {
         console.error('Update error:', error);
         res.status(500).json({ error: 'Failed to update floor plan', details: error.message });
       }
-      break;
-
+      break; 
     default:
       res.setHeader('Allow', ['GET', 'PUT']);
       res.status(405).end(`Method ${method} Not Allowed`);

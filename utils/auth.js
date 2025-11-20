@@ -1,3 +1,15 @@
+// Utility functions for staff authentication
+
+export function isStaffAuthenticated() {
+  if (typeof window === 'undefined') return false;
+  return !!localStorage.getItem('staffAuthToken');
+}
+
+export function logoutStaff() {
+  if (typeof window === 'undefined') return;
+  localStorage.removeItem('staffAuthToken');
+  window.location.href = '/staff-login';
+}
 // utils/auth.js
 
 // Dummy implementation for verifyAdmin
