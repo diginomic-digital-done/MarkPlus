@@ -773,7 +773,7 @@ export default function Home() {
             {/* Final step actions */}
             <div className="flex flex-col justify-start w-full max-w-xl">
               <h2 className="text-3xl font-bold mb-2">Your design is complete</h2>
-              <div className="mb-6 text-lg font-semibold">Hi {localStorage.getItem('reviewFirstName') || '[Name]'},<br />You're all set — time to take the next step</div>
+                <div className="mb-6 text-lg font-semibold">Hi {localStorage.getItem('reviewFirstName') || '[N}ame]'},<br />  {"You're all set — time to take the next step"}</div>
               <div className="flex flex-col gap-4 mb-6">
                 <div className="flex items-center justify-between border-b pb-4">
                   <div>
@@ -865,7 +865,7 @@ export default function Home() {
             )}
           </div>
         </div>
-      </main> 
+      </main>
     </div>
   );
 }
