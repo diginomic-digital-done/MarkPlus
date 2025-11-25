@@ -1,0 +1,89 @@
+@use "../helpers/variables" as variables;
+@use "../helpers/mixins" as mixins;
+
+.footer{
+    height: clamp(70px, calc((90vh / 7)), 20vh);
+    padding:clamp(14px, 1vw, 1.5vw) clamp(28px, 2vw, 2.2vw) clamp(14px, 1vw, 1.5vw) clamp(60px, 4.2vw, 4.5vw);
+    border-top:none;
+    &:before{
+        content:'';
+            background-color: #000;
+            height: 1px;
+            position: absolute;
+            top: 0;
+            width: 100vw;
+            z-index: 46;
+            left: -25%;
+            right: 0;
+    }
+    @include mixins.min-tablet{
+        height:15.6vh;
+    }
+
+    &-info{
+        display:flex;
+        gap:clamp(30px, 2.1vw, 2.2vw);
+        span{
+            display:flex;
+            color:#000;
+            align-items: center;
+            justify-content: space-between;
+            gap:clamp(4px, 0.3vw, 0.4vw);
+            font-size:clamp(12px, 0.8vw, 1vw);
+            line-height:clamp(16px, 1.1vw, 1.3vw);
+            font-weight:600;
+        }
+        svg{
+            width:clamp(20px, 1.4vw, 1.6vw);
+            height:clamp(20px, 1.4vw, 1.6vw);
+        }
+    }
+    &-plan-name{
+        font-weight:bold;
+        font-size:clamp(28px, 2vw, 2.5vw);
+        line-height:clamp(28px, 2vw, 2.5vw);
+        color: #000;
+        position:relative;
+        &:before{
+            content:'';
+            background-color: rgba(229, 230, 231, 1);
+            height: 100%;
+            position: absolute;
+            bottom: 0px;
+            width: clamp(1px, 0.1vw, 0.2vw);
+            z-index: 1;
+            left: clamp(-1.7vw, -1vw, -15px);
+            right: 0;
+        }
+    }
+    &-btn-wrap{
+        display:flex;
+        gap:clamp(34px, 2.5vw, 3vw);
+        align-items: center;
+
+        .btn-back{
+            position:relative;
+            overflow: visible;
+            &:before{
+            content:'';
+            background-color: rgba(229, 230, 231, 1);
+            height: 100%;
+            position: absolute;
+            bottom: 0px;
+            width: clamp(1px, 0.1vw, 0.2vw);
+            z-index: 1;
+            left: clamp(-1.7vw, -1vw, -15px);
+            right: 0;
+        }
+        }
+    }
+}
+
+
+.center-wrapper ~ .footer{
+    right:clamp(240px, 16vw, 18vw);
+    width:calc(100% - clamp(240px, 16vw, 18vw) - 20%);
+    &::before{
+        left:-31%;
+    }
+}

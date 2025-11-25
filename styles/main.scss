@@ -1,0 +1,17 @@
+// This is the main SCSS file.
+// You can import other SCSS files here.
+
+// Example:
+// @import 'variables';
+@use 'base/base';
+@use 'helpers/mixins';
+@use 'helpers/variables';
+@use 'components/buttons';
+@use 'components/header';
+@use 'components/sidebar';
+@use 'components/right-sidebar';
+@use 'components/card';
+@use 'components/page';
+@use 'components/footer';
+@use 'components/form';
+@use 'components/common-card';

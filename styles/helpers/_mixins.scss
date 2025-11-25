@@ -1,0 +1,371 @@
+/*_mixins.scss
+SCSS file for all mixin elements.
+
+@file _mixins.scss
+@path /assets/scss/_mixins.scss
+@version 2025-01-21
+*/
+
+/* Placeholder css property */
+@use "./variables" as variables;
+
+@mixin placeholder {
+  &::placeholder {
+    @content;
+  }
+
+  &:-ms-input-placeholder {
+    @content;
+  }
+
+  &::-ms-input-placeholder {
+    @content;
+  }
+}
+
+/* hover, focus, active css property Begin */
+@mixin hover {
+  &:hover {
+    @content;
+  }
+}
+
+@mixin focus {
+  &:focus {
+    @content;
+  }
+}
+
+@mixin hover-focus {
+  &:hover,
+  &:focus {
+    @content;
+  }
+}
+
+@mixin hover-focus-active {
+  &:hover,
+  &:focus,
+  &.active {
+    @content;
+  }
+}
+
+@mixin hover-focus-active-visited {
+  &:hover,
+  &:focus,
+  &.active,
+  &.visited {
+    @content;
+  }
+}
+@mixin focus-active-visited {
+  &:focus,
+  &.active,
+  &.visited {
+    @content;
+  }
+}
+
+@mixin transition-03 {
+  transition: all 0.3s ease-in;
+}
+
+@mixin transition-05 {
+  transition: all 0.5s ease-in;
+}
+
+// Source mixins
+$mobile: 767px;
+$min-tablet: 821px;//min-tablet
+$tablet-width: 1024px;//tablet
+$lg-tablet-width: 1100px;//lg-tablet
+$mid-desktop-width: 1400px;//middesktop
+$desktop-width: 1441px;//desktop
+$largeDesktop-width: 1600px;//largeDesktop
+$bigScreen: 1921px;//bigScreen
+
+//mobile
+
+@mixin mobile {
+  @media (max-width: #{$mobile}) {
+    @content;
+  }
+}
+@mixin min-tablet {
+  @media (max-width: #{$min-tablet}) {
+    @content;
+  }
+}
+@mixin tablet {
+  @media (max-width: #{$tablet-width}) {
+    @content;
+  }
+}
+
+@mixin lg-tablet {
+  @media (max-width: #{$lg-tablet-width}) {
+    @content;
+  }
+}
+
+@mixin middesktop {
+  @media (max-width: #{$mid-desktop-width}) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (max-width: #{$desktop-width}) {
+    @content;
+  }
+}
+
+@mixin largeDesktop {
+  @media (max-width: #{$largeDesktop-width}) {
+    @content;
+  }
+}
+@mixin bigScreen {
+  @media (min-width: #{$bigScreen}) {
+    @content;
+  }
+}
+// common font
+
+@mixin large-font {
+  font-size: $font-60;
+  font-weight: $fw-400;
+  line-height: $lh-10;
+
+  @include mobile {
+    font-size: $font-36;
+  }
+}
+
+@mixin common-font {
+  color: inherit;
+  font-size: variables.$font-16;
+  font-weight: variables.$fw-400;
+
+  @include tablet {
+    font-size: variables.$font-14;
+    font-weight: variables.$fw-400;
+  }
+}
+
+@mixin small-font {
+  font-size: $font-11;
+  font-weight: $fw-600;
+  line-height: $lh-30;
+  letter-spacing: $ls-22;
+
+  @include tablet {
+    font-size: $font-10;
+  }
+}
+
+@mixin border-line-position {
+  right: calc((100vw - 1856px) / 2 + 672px);
+  
+}
+
+@mixin header-first-ul {
+  max-width: 65%;
+  width: 100%;
+  padding-right: 30px;
+  padding-bottom: 32px;
+  max-height: calc(100% - 128px);
+  height: 100%;
+  overflow: auto;
+  // scrollbar design
+  scrollbar-width: none;
+  scrollbar-color: #463c33 #e7e5e4;
+  &:-webkit-scrollbar {
+    width: 1px;
+  }
+  &::-webkit-scrollbar-track {
+    background: #e7e5e4;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: #463c33;
+    border-radius: 8px;
+    border: 0.1px solid #e7e5e4;
+  }
+  @include tablet {
+    padding-right: 0;
+    border-right: 0;
+  }
+  @include mobile {
+    max-width: 100%;
+    scrollbar-width: none;
+  }
+  li {
+    max-width: 100%;
+    width: 100%;
+    padding: 32px 0;
+    background-position: top 41px right;
+    @include arrow-listing;
+    @include tablet {
+      padding: 24px 0;
+      background-position: top 29px right;
+    }
+    @include transition-03;
+  }
+  li,
+  a {
+    color: $color-79716B;
+    /* Display/Heading 30 */
+    font-family: variables.$body;
+    font-size: variables.$font-30;
+    font-weight: variables.$fw-400;
+    line-height: 120%; /* 36px */
+    display: block;
+    @include transition-03;
+    @include tablet {
+      font-size: variables.$font-24;
+    }
+  }
+}
+
+@mixin transition-03 {
+  transition: all 0.3s ease-in;
+}
+
+@mixin transition-05 {
+  transition: all 0.5s ease-in;
+}
+
+@mixin cta-txt {
+  color: variables.$Body;
+  /* Text 16/Body 16 */
+  font-family: variables.$body;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 140%; /* 22.4px */
+  letter-spacing: 0.16px;
+}
+@mixin global-subtitle {
+  color: variables.$Subtle-Text;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 140%;
+  letter-spacing: 0.56px;
+  text-transform: uppercase;
+  padding-left: 12px;
+  border-left: 1px solid variables.$color-border-default;
+}
+
+// For global titles
+@mixin common-headings {
+  
+  font-weight: variables.$fw-600;
+  font-family: variables.$fontheading;
+  line-height: 105%; /* 66px */
+  font-size:variables.$font-48;
+  @include mobile {
+    font-size: variables.$font-30;
+  }
+}
+@mixin h1 {
+  font-size: variables.$font-64;
+  @include mobile {
+    font-size: variables.$font-40;
+  }
+}
+@mixin h2 {
+  font-size: variables.$font-36;
+  @include mobile {
+    font-size: variables.$font-30;
+  }
+}
+@mixin h3 {
+  font-size: variables.$font-30;
+   @include mobile {
+    font-size: variables.$font-24;
+  }
+}
+@mixin h4 {
+  font-size: variables.$font-22;
+  @include mobile {
+    font-size: variables.$font-18;
+  }
+}
+@mixin h5 {
+  font-size: variables.$font-20;
+  line-height: 124%; /* 28px */
+  @include mobile {
+    font-size: variables.$font-18;
+  }
+}
+@mixin h6 {
+  /* New/Button Base */
+  font-family: variables.$fontheading;
+  font-size: variables.$font-13;
+  font-weight: variables.$fw-700;
+  
+}
+
+// custom checkbox
+@mixin custom-checkbox{
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  margin-top: 0;
+  background-size: 100% 100%;
+  background-image: url("data:image/svg+xml,%3Csvg width='20' height='21' viewBox='0 0 20 21' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cmask id='path-1-inside-1_4105_32883' fill='white'%3E%3Cpath d='M0 0.5H20V20.5H0V0.5Z'/%3E%3C/mask%3E%3Cpath d='M0 0.5V-0.9H-1.4V0.5H0ZM20 0.5H21.4V-0.9H20V0.5ZM20 20.5V21.9H21.4V20.5H20ZM0 20.5H-1.4V21.9H0V20.5ZM0 1.9H20V-0.9H0V1.9ZM18.6 0.5V20.5H21.4V0.5H18.6ZM20 19.1H0V21.9H20V19.1ZM1.4 20.5V0.5H-1.4V20.5H1.4Z' fill='%23C1B1A1' fill-opacity='0.33' mask='url(%23path-1-inside-1_4105_32883)'/%3E%3C/svg%3E%0A");
+  background-position: center;
+  background-repeat: no-repeat;
+  margin: 0;
+  border: 0;
+  outline: none !important;
+  @include transition-03;
+  @include hover {
+      border-color: transparent;
+  }
+  &:checked {
+      background-image: url("data:image/svg+xml,%0A%3Csvg width='20' height='21' viewBox='0 0 20 21' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cg clip-path='url(%23clip0_2377_1573)'%3E%3Cmask id='mask0_2377_1573' style='mask-type:luminance' maskUnits='userSpaceOnUse' x='0' y='0' width='20' height='21'%3E%3Cpath d='M0 0.5H20V20.5H0V0.5Z' fill='white'/%3E%3C/mask%3E%3Cg mask='url(%23mask0_2377_1573)'%3E%3Cpath d='M-2.44379e-05 0.499609V-0.900391H-1.40002V0.499609H-2.44379e-05ZM20 0.499609H21.4V-0.900391H20V0.499609ZM20 20.4996V21.8996H21.4V20.4996H20ZM-2.44379e-05 20.4996H-1.40002V21.8996H-2.44379e-05V20.4996ZM-2.44379e-05 1.89961H20V-0.900391H-2.44379e-05V1.89961ZM18.6 0.499609V20.4996H21.4V0.499609H18.6ZM20 19.0996H-2.44379e-05V21.8996H20V19.0996ZM1.39998 20.4996V0.499609H-1.40002V20.4996H1.39998Z' fill='%23C1B1A1' fill-opacity='0.33'/%3E%3C/g%3E%3Cpath d='M16 6.5L7.75 14.75L4 11' stroke='%23AFAFAF' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/g%3E%3Cdefs%3E%3CclipPath id='clip0_2377_1573'%3E%3Crect width='20' height='21' fill='white'/%3E%3C/clipPath%3E%3C/defs%3E%3C/svg%3E%0A");
+  }
+}
+
+.for-mobile{
+   display:none;
+  @include mobile{
+    display:block;
+  }
+  @include tablet{
+  display:none;
+  }
+  @include desktop{
+    display:none;
+  }
+}
+
+.for-tablet{
+  display:none;
+  @include mobile{
+  display:none;
+  }
+  @include tablet{
+    display:block;
+  }
+  @include desktop{
+    display:none;
+  }
+}
+
+.for-desktop{
+  display:none;
+  @include mobile{
+    display:none;
+  }
+  @include tablet{
+    display:none;
+  }
+  @include desktop{
+    display:block;
+  }
+}

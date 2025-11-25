@@ -1,0 +1,36 @@
+@use "../helpers/variables" as variables;
+@use "../helpers/mixins" as mixins;
+
+
+.right-sidebar{
+        overflow: scroll;
+        scrollbar-width: none;
+        height: 100vh;
+        gap:clamp(25px, 3.3vh, 3.4vh);
+        padding-bottom:clamp(25px, 15vh, 16vh);
+
+    &-wrapper{
+      width:clamp(240px, 16vw, 18vw);
+      border-left:1px solid rgba(168, 173, 176, 1);
+      padding:clamp(26px, 2vh, 3vh) clamp(26px, 1.7vw, 2vw);
+        z-index: 1;
+        background: #fff;
+    }
+       
+
+        &-heading{
+          font-size: clamp(12px, 0.8vw, 1vw);
+          font-weight: 600;
+          line-height: clamp(16px, 1.1vw, 1.2vw);
+          color:#000;
+          text-align: center;
+          margin-bottom:clamp(14px, 2vh, 2.2vh);
+        }
+        &-subheading{
+         font-size: clamp(18px, 1.2vw, 1.4vw);
+         font-weight: 600;
+         line-height: clamp(20px, 1.5vw, 1.7vw);
+         text-align: left;
+         margin-top:clamp(4px, 0.7vh,0.8vh);
+        }
+}

@@ -1,0 +1,119 @@
+@use "../helpers/variables" as variables;
+@use "../helpers/mixins" as mixins;
+
+
+.screen-wrapper {
+    overflow: hidden;
+    height: 100vh;
+}
+
+.grid-wrapper {
+    height: 100%;
+    overflow: scroll;
+    scrollbar-width: none;
+    padding-bottom: 25vh;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    padding: clamp(14px, 1vw, 1.5vw) clamp(28px, 2vw, 2.2vw) max(70px, 25vh) clamp(60px, 4.2vw, 4.5vw);
+    gap: clamp(47px, 3.4vw, 3.8vw);
+    align-items: stretch;
+
+    @include mixins.mobile {
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
+}
+
+.color-blue {
+    color: variables.$color-0566DE;
+}
+
+.common-card {
+    padding: clamp(17px, 1.2vw, 2vw) clamp(17px, 1.2vw, 2vw);
+    background-color: rgba(246, 246, 247, 1);
+    aspect-ratio: 325 / 508;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    &-img-wrap {}
+
+    &-img {
+        max-width: clamp(210px, 14.5vw, 16vw);
+        margin: 0 auto;
+        //aspect-ratio: 210 / 430;
+    }
+
+    &-bottom-txt {}
+
+    &-price-wrap {
+        font-size: clamp(12px, 0.85vw, 1vw);
+        line-height: clamp(16px, 1.2vw, 1.3vw);
+        font-weight: 600;
+        color: #000;
+    }
+
+    &-bottom-wrapper {
+        display: flex;
+        justify-content: space-between
+    }
+
+    &-bottom-title {
+        font-size: clamp(28px, 1.7vw, 2vw);
+        line-height: clamp(28px, 1.7vw, 2vw);
+        font-weight: 600;
+        color: #000;
+    }
+
+    &-bottom-icons {
+        gap: clamp(10px, 0.7vw, 1vw);
+
+        span {
+            font-size: clamp(12px, 0.85vw, 1vw);
+            line-height: clamp(16px, 1.2vw, 1.3vw);
+            font-weight: 600;
+            color: #000;
+        }
+
+        svg {
+            width: max(18px, 1.1vw);
+            height: max(14px, 1vw);
+        }
+    }
+}
+
+.center-wrapper{
+    display:flex;
+    flex-direction: row;
+     background: #fff;//240px, 16vw, 18vw
+    
+    &-img{
+         width:clamp(819px, 64vw, 84vw);
+        padding:clamp(55px, 8.3vh, 9vh) clamp(60px, 4.3vw, 4.5vw);
+        img{
+
+        }
+        &-txt{
+            font-size: clamp(20px, 1.2vw, 1.5vw);
+            line-height: clamp(28px, 1.7vw, 2vw);
+            font-weight:400;
+        }
+    }
+    &-img-grid-content{
+        display:flex;
+        flex-direction: row;
+        &-image{
+            background-color: variables.$color-F6F6F7;
+            padding:clamp(65px,9vh,10vh) clamp(109px,7.5vw,8vw);
+         img{
+             aspect-ratio: 332 /456;
+             width: 100%;
+             object-fit: cover;
+         }
+        }
+        &-text{
+           width:clamp(340px, 22vw, 32vw);
+           padding: 0 clamp(30px, 2.1vw, 2.2vw);
+           margin-right: calc(0.5% - (clamp(60px, 4.3vw, 4.5vw)));
+           display:flex;
+        }
+    }
+}

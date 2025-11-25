@@ -1,0 +1,92 @@
+// Example button styles
+@use "../helpers/variables" as variables;
+@use "../helpers/mixins" as mixins;
+
+.btn {
+  padding: 10px 20px;
+  border-radius: 5px;
+  font-size: 17px;
+  font-weight:600;
+  line-height: 20px;
+  height:auto;
+  cursor: pointer;
+ 
+
+  &--primary {
+    background-color: variables.$color-0566DE;
+    color: white;
+  }
+
+  &--secondary {
+    background-color: #6c757d;
+    color: white;
+  }
+}
+
+.nav-item-label {
+  
+  font-weight: 600;
+}
+
+.btn-blue{
+background-color: variables.$color-0566DE;
+  color: white;
+}
+
+.btn-orange{
+  background-color: variables.$color-F87C56;
+  color:#fff;
+  border-radius: clamp(28px, 1.82vw, 2vw);
+  //padding:18px 55px;
+  font-size: clamp(17px, 1.25vw, 1.5vw);
+  padding:clamp(18px, 1.3vw, 1.5vw) clamp(55px, 4vw, 5vw);
+  height: auto;
+    line-height: normal;
+}
+
+.btn-disable{
+ 
+}
+
+.btn-arrow{
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8 16" fill="none"><path d="M5.68294 8.00002L0.240762 1.65081C-0.118661 1.23148 -0.0700991 0.600184 0.349227 0.240762C0.768553 -0.118661 1.39985 -0.0700991 1.75927 0.349227L7.75927 7.34923C8.08027 7.72372 8.08027 8.27632 7.75927 8.65081L1.75927 15.6508C1.39985 16.0701 0.768553 16.1187 0.349227 15.7593C-0.0700991 15.3999 -0.118661 14.7686 0.240762 14.3492L5.68294 8.00002Z" fill="white"/></svg>');
+  // background-size: 8px 16px;
+  background-size: clamp(8px, 0.5vw, 1vw) clamp(16px, 1vw, 2vw);
+  background-position: right 1vw center;
+  background-repeat: no-repeat;
+  border-radius:clamp(28px,2vw, 2.1vw);
+  padding:clamp(9px, 2vh, 1vw) clamp(13px, 1vw, 1.5vw);
+  min-width: clamp(141px, 10vw, 12vw);
+  text-align: left;
+  justify-content: flex-start;
+  font-size: clamp(17px, 1.25vw, 1.5vw);
+  line-height:clamp(17px, 1.25vw, 1.5vw);
+  height:auto;
+}
+
+.btn-restart{
+    color:variables.$color-A8ADB0;
+    font-size: clamp(12px, 0.8vw, 1vw);
+    line-height: clamp(16px, 1.1vw, 1.3vw);
+    font-weight: 600;
+    height:auto;
+    gap:clamp(9px, 0.6vw, 0.8vw);
+    
+    svg{
+        width:clamp(24px, 1.7vw, 1.8vw);
+        height:clamp(24px, 1.7vw, 1.8vw);
+    }
+}
+
+.btn-back{
+    color:variables.$color-A8ADB0;
+    font-size: clamp(12px, 0.8vw, 1vw);
+    line-height: clamp(16px, 1.1vw, 1.3vw);
+    font-weight: 600;
+    height:auto;
+    gap:clamp(9px, 0.6vw, 0.8vw);
+    svg{
+        width:clamp(24px, 1.7vw, 1.8vw);
+        height:clamp(24px, 1.7vw, 1.8vw);
+    }
+}

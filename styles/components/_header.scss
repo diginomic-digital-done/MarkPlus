@@ -1,0 +1,26 @@
+@use "../helpers/variables" as variables;
+@use "../helpers/mixins" as mixins;
+
+.logo-wrapper{
+  background-color:#000;
+}
+
+.header-flex-wrapper{
+  // padding:14px 28px 14px 60px;
+  padding:clamp(1.85vh, 1.65vh, 2vh) clamp(28px, 2vw, 2.2vw) clamp(1.85vh, 1.65vh, 2vh) clamp(60px, 4.2vw, 4.5vw);
+  border: 0 solid #000;
+  box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.15);
+      z-index: 2;
+    position: relative;
+}
+
+.heading{
+  font-size: clamp(22px, 2.5vw, 3vw);
+}
+
+.header-lavida-logo{
+    object-fit: cover;
+    width: 100%;
+    max-width: max(60px, 4.2vw);
+    max-height: max(41px, 3.1vw);
+}

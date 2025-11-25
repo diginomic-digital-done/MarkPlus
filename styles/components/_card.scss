@@ -1,0 +1,20 @@
+@use "../helpers/variables" as variables;
+@use "../helpers/mixins" as mixins;
+
+
+
+.icon-box{
+    font-size:clamp(12px, 0.9vw, 1.2vw);
+    font-weight: 600;
+    line-height: 16px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    svg{
+       //max-width: 18px;
+    //    width: 100%;
+       width: clamp(1vw, 1.3vw, 1.5vw);
+       height:clamp(1vw, 1.2vw, 1.4vw);
+    }
+
+
+}

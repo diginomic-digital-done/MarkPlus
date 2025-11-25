@@ -1,0 +1,277 @@
+@use "../helpers/variables" as variables;
+@use "../helpers/mixins" as mixins;
+
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+html {
+  scrollbar-width: none;
+}
+body {
+  margin: 0;
+  padding: 0;
+  font-family: variables.$body;
+  background-color: #FDFBFB;
+  // padding-top:77px;
+  @include mixins.tablet{
+    // padding-top:70px;
+  }
+}
+
+p:empty{display:none;}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+strong,
+form,
+input,
+select,
+textarea {
+  margin: 0;
+  padding: 0;
+}
+p,
+li {
+  margin: 0;
+  padding: 0;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+a:hover,
+a:active,
+a:focus {
+  outline: none;
+}
+
+a {
+  &:visited {
+    text-decoration: none;
+   
+  }
+}
+
+
+
+
+
+
+select input,
+textarea {
+  border: 1px solid #ebe7e2;
+  outline: none;
+  @include mixins.hover {
+    border-color: #171412;
+  }
+  @include mixins.focus-active-visited {
+    border-color: #ebe7e2;
+  }
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+li,
+q,
+blockquote {
+  margin: 0;
+  padding: 0;
+  span {
+    font-size: inherit;
+    line-height: inherit;
+    letter-spacing: inherit;
+    font-weight: inherit;
+    color: inherit;
+  }
+}
+a {
+  text-decoration: none;
+  color: inherit;
+  line-height: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  transition: all 0.3s;
+  &:not([class]):hover {
+    opacity: 0.6;
+  }
+  &:not(:has([class])):has([tabindex]):hover, &:has(img):hover{
+    opacity:1 !important;
+  }
+}
+
+select {
+  -webkit-appearance: none;
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="9" height="6" viewBox="0 0 9 6" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M0.933058 0.968703C1.17714 0.724625 1.57286 0.724625 1.81694 0.968703L4.5 3.65176L7.18306 0.968703C7.42714 0.724625 7.82286 0.724625 8.06694 0.968703C8.31102 1.21278 8.31102 1.60851 8.06694 1.85259L4.94194 4.97759C4.69786 5.22166 4.30214 5.22166 4.05806 4.97759L0.933058 1.85259C0.688981 1.60851 0.688981 1.21278 0.933058 0.968703Z" fill="%233A623C"/></svg>');
+  background-size: 18px;
+  padding-right: 35px;
+  background-position: right 15px top 15px;
+  background-repeat: no-repeat;
+  &:focus-visible {
+    outline: none;
+}
+}
+
+
+body {
+  
+ 
+  h1,
+  h2,
+  h3,
+  h4,
+  .h1,
+  .h2,
+  .h3,
+  .h4 {
+    @include mixins.common-headings;
+  }
+  h1,
+  .h1 {
+    @include mixins.h1;
+  }
+  h2,
+  .h2 {
+    @include mixins.h2;
+  }
+  h3,
+  .h3 {
+    @include mixins.h3;
+  }
+  h4,
+  .h4 {
+    @include mixins.h4;
+  }
+  h5,
+  .h5 {
+    @include mixins.h5;
+  }
+  h6,
+  .h6 {
+    @include mixins.h6;
+    & > a {
+      font-size: inherit;
+      font-family: inherit;
+      font-weight: inherit;
+      color: inherit;
+      line-height: inherit;
+      letter-spacing: inherit;
+    }
+  }
+}
+
+p,
+span,
+strong,
+b,
+button,
+li,
+.p {
+  @include mixins.common-font;
+}
+b,
+strong {
+  font-weight: 700;
+  font-size: inherit;
+}
+label {
+  font-size: variables.$font-14;
+  font-style: normal;
+  font-weight: variables.$fw-600;
+  line-height: 140%; /* 21px */
+  letter-spacing: 0.14px;
+}
+q {
+  position: relative;
+  padding-left: 10px;
+  display: flex;
+}
+q::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 2px;
+  background-color: rgba(158, 145, 130, 0.3294117647);
+}
+
+// global
+.trade-container {
+  max-width: 1216px;
+  width: 100%;
+  // padding: variables.$padding-base;
+  margin: 0 auto;
+      position: relative;
+  @include mixins.middesktop {
+    padding: 0 16px;
+  }
+  @include mixins.tablet {
+    padding: 0 16px;
+  }
+  @include mixins.mobile {
+    padding: 0 16px;
+  }
+}
+
+ 
+
+.imgzoom{
+        overflow:hidden;
+        img{
+        transition:all 0.5s;
+        }
+        &:hover{
+        img{transform:scale(1.1);}
+        }
+}
+
+
+
+ 
+
+// for extra small padding
+
+img {
+  width: 100%;
+}
+
+.for-mobile{
+  display:none;
+   @include mixins.desktop{
+        display:none;
+      }
+      @include mixins.tablet{
+        display:block;
+      }
+     
+     
+}
+
+.for-desktop{
+  display:block;
+    @include mixins.desktop{
+      display: block;
+    }
+    @include mixins.tablet{
+      display: none;
+    } 
+    
+
+}
+
+.slick-dots{
+  @include mixins.mobile{
+   display:none !important;
+  }
+}

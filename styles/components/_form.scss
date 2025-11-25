@@ -1,0 +1,299 @@
+@use "../helpers/variables" as variables;
+@use "../helpers/mixins" as mixins;
+
+.popup-cover {
+  background-color: rgba(218, 239, 255, 0.8);
+}
+
+.popup-form-parent {
+  width: 100%;
+  max-width: clamp(700px, 50vw, 51vw);
+  border-radius: 10px;
+  border: 0 solid #000;
+  background: #FFF;
+  box-shadow: 2px 2px 4px 0 rgba(0, 0, 0, 0.15);
+  position: relative;
+
+  &:after {
+    content: '';
+    position: absolute;
+    background-image: url(/form-image.png);
+    height: clamp(247px, 37.5vh, 40vh);
+    width: clamp(255px, 18.3vw, 19vw);
+    bottom: 0;
+    left: 0;
+    background-size: 60%;
+    background-repeat: no-repeat;
+    background-position: left bottom;
+    z-index: 0;
+
+  }
+}
+
+.popup-form {
+  max-width: clamp(367px, 25.2vw, 27vw);
+  margin: 0 auto;
+  padding-top: clamp(50px, 10vh, 15vh);
+  padding-bottom: clamp(50px, 10vh, 15vh);
+  z-index: 1;
+  position: relative;
+
+  button {
+    margin-top: clamp(35px, 7.8vh, 9vh);
+  }
+}
+
+.form {
+  &-pre-head {
+    color: variables.$color-7C878E;
+    text-align: center;
+    font-size: clamp(15px, 1.7vw, 2.2vw);
+    line-height: clamp(15px, 1.7vw, 2.2vw);
+  }
+
+  &-head {
+    font-size: clamp(18px, 2vw, 2.1vw);
+    color: variables.$color-000000;
+    font-weight: 600;
+  }
+
+  &-name-input {
+    margin-top: clamp(45px, 6.2vh, 8vh);
+
+    @include mixins.mobile {
+      margin-top: 96px;
+    }
+
+    input {
+      width: 100%;
+      border-bottom: 1px solid #A8ADB0;
+      color: variables.$color-000000;
+      font-size: clamp(17px, 1.4vw, 2vw);
+      font-weight: 400;
+      line-height: 27px;
+      letter-spacing: 0.5px;
+      padding-bottom: clamp(12px, 1.7vh, 2vh);
+
+      &::placeholder {
+        color: #A8ADB0;
+      }
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+  }
+
+}
+
+.region-radio-group {
+  display: flex;
+  gap: clamp(20px, 1.2vw, 1.3vw);
+  justify-content: center;
+  margin-top: clamp(20px, 2.2vh, 2.5vh);
+  margin-bottom: clamp(20px, 2.2vh, 2.5vh);
+  flex-wrap: wrap;
+
+  .region-radio-option {
+    cursor: pointer;
+    border: 1px solid #000;
+    border-radius: clamp(28px, 1.82vw, 2vw);
+    padding: clamp(16px, 1.1vw, 1.3vw) clamp(50px, 3vw, 5vw);
+    height: auto;
+    line-height: normal;
+    font-size: clamp(17px, 1.25vw, 1.5vw);
+    font-weight: 600;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: transparent;
+    color: #000;
+
+    span {
+      font-size: inherit;
+    }
+
+    input {
+      display: none;
+    }
+
+    &.active {
+      background-color: #FF6A39;
+      color: #fff;
+      border-color: #FF6A39;
+    }
+
+    &:hover {
+      background-color: transparent;
+      color: #FF6A39;
+    }
+
+    &:hover:not(.active) {
+      background-color: rgba(0, 0, 0, 1);
+      color: #fff;
+    }
+  }
+}
+
+
+// contact form popup styles
+.popup-form-parent:has(.contact-popup-form) {
+  max-width: clamp(700px, 55vw, 56vw);
+
+  &:after {
+    display: none;
+  }
+
+  &:before {
+    content: '';
+    position: absolute;
+    background-image: url(/form-image2.png);
+    height: clamp(247px, 17.5vh, 20vh);
+    width: clamp(255px, 14.3vw, 15vw);
+    top: 0;
+    left: 0;
+    background-size: 60%;
+    background-repeat: no-repeat;
+    background-position: left top;
+    z-index: 0;
+  }
+}
+
+.contact-popup-form {
+  max-width: clamp(511px, 37vw, 38vw);
+  margin: 0 auto;
+  padding-top: clamp(50px, 3.5vh, 4vh);
+  padding-bottom: clamp(50px, 3.5vh, 4vh);
+  z-index: 1;
+  position: relative;
+  text-align: center;
+
+  input {
+    width: 100%;
+    border: 2px solid #DBDBDD;
+    border-radius: clamp(6px, 0.5vw, 0.6vw);
+    padding: clamp(16px, 1.1vw, 1.2vw) clamp(16px, 1.1vw, 1.2vw);
+    font-size: clamp(14px, 1vw, 1.1vw);
+    color: variables.$color-000000;
+    margin-top: clamp(10px, 2vh, 2.1vh);
+
+    &::placeholder {
+      color: #A8ADB0;
+    }
+  }
+
+  button {
+    margin-top: clamp(21px, 3vh, 3.1vh);
+  }
+}
+
+.contact-form {
+  &-head {
+    color: #000;
+    font-size: clamp(24px, 1.7vw, 2vw);
+    line-height: clamp(24px, 1.7vw, 2vw);
+  }
+
+  &-subhead {
+    color: #000;
+    font-size: clamp(16px, 1vw, 1.5vw);
+    font-weight: 400;
+    line-height: clamp(20px, 1.5vw, 2vw);
+    padding: 0 10px;
+  }
+
+  &-close {
+    font-size: clamp(16px, 1.2vw, 1.5vw);
+    right: -7vw;
+    top: 0;
+    margin-top: 2vh;
+  }
+
+  &-label {
+    color: #4D4D56;
+    font-size: clamp(16px, 1vw, 1.5vw);
+    font-weight: 400;
+    line-height: clamp(20px, 1.5vw, 2vw);
+    margin-top: clamp(21px, 2.1vh, 2.2vh);
+  }
+
+  &-radio-group {
+    margin-top: clamp(10px, 2vh, 2.1vh);
+    gap: clamp(40px, 3.5vw, 4vw);
+  }
+
+  &-input-label {
+    font-size: clamp(12px, 0.8vw, 1vw);
+    color: #000;
+    font-weight: 600;
+    line-height: clamp(16px, 1.2vw, 1.3vw);
+
+    display: flex;
+    align-items: center;
+    gap: clamp(5px, 0.3vw, 0.5vw);
+
+    cursor: pointer;
+    position: relative;
+
+    input[type="radio"] {
+      appearance: none;
+      -webkit-appearance: none;
+      width: 0;
+      height: 0;
+      margin: 0;
+      padding: 0;
+      font-size: 0;
+      border: 0;
+      position: relative;
+
+    }
+
+    input[type="radio"]::before {
+      content: "";
+      width: clamp(20px, 1.5vw, 1.8vw);
+      height: clamp(20px, 1.5vw, 1.8vw);
+      border-radius: 50%;
+      border: clamp(4px, 0.3vw, 0.4vw) solid #b0b5bb;
+      /* Gray outline for unselected */
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: 0px;
+      box-sizing: border-box;
+      position: absolute;
+      left: clamp(-2vw, -1.5vw, -0.8vw);
+      top: clamp(-1vw, -0.7vw, -0.6vw);
+
+    }
+
+    input[type="radio"]:checked::before {
+      background-color: #0a6cff;
+      /* Blue fill */
+      border-color: #0a6cff;
+    }
+
+    input[type="radio"]:checked::after {
+      content: "";
+      width: clamp(6px, 0.5vw, 0.6vw);
+      height: clamp(6px, 0.5vw, 0.6vw);
+      background: white;
+      border-radius: 50%;
+      position: absolute;
+      left: clamp(-1vw, -0.95vw, -0.3vw);
+      /* centers inside 34px circle */
+      top: clamp(-1vw, -0.2vw, -0.1vw);
+      /* centers inside 34px circle */
+    }
+  }
+
+  &-footer-txt {
+    color: #4D4D56;
+    font-size: clamp(14px, 1vw, 1.1vw);
+    line-height: clamp(16px, 1.2vw, 1.3vw);
+    max-width: clamp(330px, 22.5vw, 23vw);
+    margin: 0 auto;
+    margin-top: clamp(21px, 3vh, 3.1vh);
+  }
+}
