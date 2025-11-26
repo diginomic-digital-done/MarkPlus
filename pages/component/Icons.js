@@ -99,3 +99,31 @@ export const Homeicon=()=>{
 </svg>
   )
 }
+
+
+export const Locate=()=>{
+  return(
+    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 16 16" fill="none">
+
+  <defs>
+ 
+    <clipPath id="outerClip">
+      <path d="M6.00016 14.6667H10.0002C13.3335 14.6667 14.6668 13.3334 14.6668 10V6.00004C14.6668 2.66671 13.3335 1.33337 10.0002 1.33337H6.00016C2.66683 1.33337 1.3335 2.66671 1.3335 6.00004V10C1.3335 13.3334 2.66683 14.6667 6.00016 14.6667Z"/>
+    </clipPath>
+  </defs>
+ 
+  <rect x="8" y="1.33337" width="6.6668" height="6.66663" fill="#007BFF" clip-path="url(#outerClip)" />
+
+ 
+  <path d="M6.00016 14.6667H10.0002C13.3335 14.6667 14.6668 13.3334 14.6668 10V6.00004C14.6668 2.66671 13.3335 1.33337 10.0002 1.33337H6.00016C2.66683 1.33337 1.3335 2.66671 1.3335 6.00004V10C1.3335 13.3334 2.66683 14.6667 6.00016 14.6667Z"
+        stroke="#A8ADB0" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+  <path d="M8 1.33337V14.6667"
+        stroke="#A8ADB0" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+  <path d="M1.3335 8H14.6668"
+        stroke="#A8ADB0" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+
+</svg>
+
+
+  )
+}

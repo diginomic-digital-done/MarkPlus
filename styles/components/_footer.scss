@@ -2,8 +2,8 @@
 @use "../helpers/mixins" as mixins;
 
 .footer{
-    height: clamp(70px, calc((90vh / 7)), 20vh);
-    padding:clamp(14px, 1vw, 1.5vw) clamp(28px, 2vw, 2.2vw) clamp(14px, 1vw, 1.5vw) clamp(60px, 4.2vw, 4.5vw);
+    height: clamp(60px, calc((90vh / 7)), 20vh);
+    padding:clamp(12px, 1vw, 1.5vw) clamp(28px, 2vw, 2.2vw) clamp(12px, 1vw, 1.5vw) clamp(60px, 4.2vw, 4.5vw);
     border-top:none;
     &:before{
         content:'';
@@ -29,8 +29,8 @@
             align-items: center;
             justify-content: space-between;
             gap:clamp(4px, 0.3vw, 0.4vw);
-            font-size:clamp(12px, 0.8vw, 1vw);
-            line-height:clamp(16px, 1.1vw, 1.3vw);
+            font-size:clamp(10px, 0.8vw, 1vw);
+            line-height:clamp(12px, 1.1vw, 1.3vw);
             font-weight:600;
         }
         svg{
@@ -84,6 +84,6 @@
     right:clamp(240px, 16vw, 18vw);
     width:calc(100% - clamp(240px, 16vw, 18vw) - 20%);
     &::before{
-        left:-31%;
+        left:-40%;
     }
 }
