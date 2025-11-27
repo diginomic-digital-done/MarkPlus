@@ -31,16 +31,6 @@ export default function PDFTest() {
       <div className="max-w-4xl mx-auto">
         <h1 className="text-3xl font-bold mb-6">PDF Compiler Test - Image Overlay</h1>
 
-        <div className="mb-6 bg-white p-6 rounded shadow">
-          <h2 className="text-xl font-semibold mb-4">Instructions:</h2>
-          <ol className="list-decimal list-inside space-y-2 text-gray-700">
-            <li><strong>Add your 4 PNG images</strong> to <code className="bg-gray-100 px-2 py-1 rounded">/public/testimages/</code> directory</li>
-            <li>Expected files: <code className="bg-gray-100 px-2 py-1 rounded">0 Standard.png</code> (base), <code className="bg-gray-100 px-2 py-1 rounded">Living 1.png</code>, <code className="bg-gray-100 px-2 py-1 rounded">Master 1.png</code>, <code className="bg-gray-100 px-2 py-1 rounded">Family 1.png</code></li>
-            <li>The transparent PNGs will automatically stack to form the complete floorplan</li>
-            <li>Click the "Generate PDF" button below to export as PDF</li>
-          </ol>
-        </div>
-
         {/* Control Panel */}
         <div className="mb-6 bg-white p-6 rounded shadow">
           <button
