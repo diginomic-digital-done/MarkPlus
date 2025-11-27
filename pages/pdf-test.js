@@ -1,9 +1,8 @@
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import { usePDF } from 'react-to-pdf';
 
 export default function PDFTest() {
   const targetRef = useRef();
-  const [overlayOpacity, setOverlayOpacity] = useState(1.0);
 
   // Configure react-to-pdf
   const { toPDF, targetRef: pdfRef } = usePDF({
@@ -37,27 +36,13 @@ export default function PDFTest() {
           <ol className="list-decimal list-inside space-y-2 text-gray-700">
             <li><strong>Add your 4 PNG images</strong> to <code className="bg-gray-100 px-2 py-1 rounded">/public/testimages/</code> directory</li>
             <li>Expected files: <code className="bg-gray-100 px-2 py-1 rounded">0 Standard.png</code> (base), <code className="bg-gray-100 px-2 py-1 rounded">Living 1.png</code>, <code className="bg-gray-100 px-2 py-1 rounded">Master 1.png</code>, <code className="bg-gray-100 px-2 py-1 rounded">Family 1.png</code></li>
-            <li>Refresh this page to see your floorplan layers overlaid</li>
+            <li>The transparent PNGs will automatically stack to form the complete floorplan</li>
             <li>Click the "Generate PDF" button below to export as PDF</li>
-            <li>(Optional) Adjust opacity slider below to fine-tune layer visibility</li>
           </ol>
         </div>
 
         {/* Control Panel */}
         <div className="mb-6 bg-white p-6 rounded shadow">
-          <div className="flex items-center gap-6 mb-4">
-            <label className="text-sm font-semibold text-gray-700">Overlay Opacity:</label>
-            <input
-              type="range"
-              min="0"
-              max="1"
-              step="0.1"
-              value={overlayOpacity}
-              onChange={(e) => setOverlayOpacity(parseFloat(e.target.value))}
-              className="flex-1"
-            />
-            <span className="text-sm font-mono bg-gray-100 px-3 py-1 rounded">{overlayOpacity.toFixed(1)}</span>
-          </div>
           <button
             onClick={() => toPDF()}
             className="bg-blue-600 text-white px-6 py-3 rounded font-semibold hover:bg-blue-700 transition w-full"
@@ -82,7 +67,6 @@ export default function PDFTest() {
                   alt={index === 0 ? 'Base Floorplan' : `${img.split('/').pop().split('.')[0]} Overlay`}
                   className="absolute top-0 left-0 w-full h-full object-contain"
                   style={{
-                    opacity: index === 0 ? 1.0 : overlayOpacity, // Base at full opacity, overlays controlled by slider
                     zIndex: index
                   }}
                 />
@@ -99,9 +83,6 @@ export default function PDFTest() {
                       {index === 0 ? 'BASE' : `LAYER ${index}`}
                     </span>
                     <span>{img.split('/').pop()}</span>
-                    <span className="text-xs text-gray-400">
-                      (opacity: {index === 0 ? '100%' : `${(overlayOpacity * 100).toFixed(0)}%`})
-                    </span>
                   </li>
                 ))}
               </ul>
