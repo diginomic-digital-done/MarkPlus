@@ -1,14 +1,43 @@
-import { useRef } from 'react';
-import { usePDF } from 'react-to-pdf';
+import { useRef, useState } from 'react';
 
 export default function PDFTest() {
-  const targetRef = useRef();
+  const [isGenerating, setIsGenerating] = useState(false);
+  const [error, setError] = useState(null);
 
-  // Configure react-to-pdf
-  const { toPDF, targetRef: pdfRef } = usePDF({
-    filename: 'overlay-test.pdf',
-    page: { margin: 10 }
-  });
+  const handleGeneratePDF = async () => {
+    setIsGenerating(true);
+    setError(null);
+
+    try {
+      const response = await fetch('/api/generate-pdf', {
+        method: 'POST',
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Failed to generate PDF');
+      }
+
+      // Get the PDF blob
+      const blob = await response.blob();
+
+      // Create download link
+      const url = window.URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'floorplan.pdf';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      window.URL.revokeObjectURL(url);
+
+    } catch (err) {
+      console.error('PDF Generation Error:', err);
+      setError(err.message);
+    } finally {
+      setIsGenerating(false);
+    }
+  };
 
   // Your 4 PNG images - base floorplan + 3 overlay layers
   const images = [
@@ -34,18 +63,24 @@ export default function PDFTest() {
         {/* Control Panel */}
         <div className="mb-6 bg-white p-6 rounded shadow">
           <button
-            onClick={() => toPDF()}
-            className="bg-blue-600 text-white px-6 py-3 rounded font-semibold hover:bg-blue-700 transition w-full"
+            onClick={handleGeneratePDF}
+            disabled={isGenerating}
+            className="bg-blue-600 text-white px-6 py-3 rounded font-semibold hover:bg-blue-700 transition w-full disabled:bg-gray-400 disabled:cursor-not-allowed"
           >
-            Generate PDF
+            {isGenerating ? 'Generating PDF...' : 'Generate PDF'}
           </button>
+          {error && (
+            <div className="mt-4 p-3 bg-red-100 border border-red-400 text-red-700 rounded">
+              Error: {error}
+            </div>
+          )}
         </div>
 
         {/* PDF Content - Image Overlay */}
         <div className="bg-white p-8 rounded shadow">
-          <h2 className="text-xl font-semibold mb-4">Preview (This will be in the PDF):</h2>
+          <h2 className="text-xl font-semibold mb-4">Preview:</h2>
 
-          <div ref={pdfRef} style={{ border: '2px solid #d1d5db', padding: '32px', backgroundColor: '#ffffff' }}>
+          <div style={{ border: '2px solid #d1d5db', padding: '32px', backgroundColor: '#ffffff' }}>
             <h3 style={{ fontSize: '24px', fontWeight: 'bold', marginBottom: '24px', textAlign: 'center', color: '#000000' }}>Complete Floorplan</h3>
 
             {/* Overlay Container */}
