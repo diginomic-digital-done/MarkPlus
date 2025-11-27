@@ -6,13 +6,13 @@ This guide explains how to test the PDF compiler functionality with react-to-pdf
 
 - ✅ `react-to-pdf` package installed
 - ✅ Test page created at `/pages/pdf-test.js`
-- ✅ Test images directory created at `/public/test-images/`
+- ✅ Test images directory created at `/public/testimages/`
 
 ## How to Add Your Images
 
-### Option 1: Using the test-images directory (Recommended)
+### Option 1: Using the testimages directory (Recommended)
 
-1. Navigate to `/public/test-images/` in your project
+1. Navigate to `/public/testimages/` in your project
 2. Add your 4 PNG files and name them:
    - `layer1.png`
    - `layer2.png`
@@ -41,7 +41,7 @@ The project already has sample images in `/public/uploads/`. To use these:
 
 1. Edit `/pages/pdf-test.js`
 2. Uncomment the alternative images array (lines 21-27)
-3. Comment out the test-images array
+3. Comment out the testimages array
 
 ## How to Test
 

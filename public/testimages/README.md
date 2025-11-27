@@ -1,6 +1,6 @@
 # Test Images Directory
 
-Place your 4 PNG images here for PDF overlay testing.
+Place your 4 PNG images here (`/public/testimages/`) for PDF overlay testing.
 
 ## Instructions:
 1. Add your 4 PNG files to this directory

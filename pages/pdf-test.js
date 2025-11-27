@@ -10,12 +10,12 @@ export default function PDFTest() {
     page: { margin: 10 }
   });
 
-  // Your 4 PNG images - update these paths after you add your images to /public/test-images/
+  // Your 4 PNG images - update these paths after you add your images to /public/testimages/
   const images = [
-    '/test-images/layer1.png',
-    '/test-images/layer2.png',
-    '/test-images/layer3.png',
-    '/test-images/layer4.png'
+    '/testimages/layer1.png',
+    '/testimages/layer2.png',
+    '/testimages/layer3.png',
+    '/testimages/layer4.png'
   ];
 
   // Alternative: Use existing sample images (remove the comment to use these instead)
@@ -34,7 +34,7 @@ export default function PDFTest() {
         <div className="mb-6 bg-white p-6 rounded shadow">
           <h2 className="text-xl font-semibold mb-4">Instructions:</h2>
           <ol className="list-decimal list-inside space-y-2 text-gray-700">
-            <li><strong>Add your 4 PNG images</strong> to <code className="bg-gray-100 px-2 py-1 rounded">/public/test-images/</code> directory</li>
+            <li><strong>Add your 4 PNG images</strong> to <code className="bg-gray-100 px-2 py-1 rounded">/public/testimages/</code> directory</li>
             <li>Name them as: <code className="bg-gray-100 px-2 py-1 rounded">layer1.png</code>, <code className="bg-gray-100 px-2 py-1 rounded">layer2.png</code>, <code className="bg-gray-100 px-2 py-1 rounded">layer3.png</code>, <code className="bg-gray-100 px-2 py-1 rounded">layer4.png</code></li>
             <li>Refresh this page to see your images overlaid</li>
             <li>Click the "Generate PDF" button below to export as PDF</li>
