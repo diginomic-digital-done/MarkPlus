@@ -2,15 +2,13 @@
 
 Place your 4 PNG images here (`/public/testimages/`) for PDF overlay testing.
 
-## Instructions:
-1. Add your 4 PNG files to this directory
-2. Name them as:
-   - `layer1.png`
-   - `layer2.png`
-   - `layer3.png`
-   - `layer4.png`
+## Required Files:
+1. `0 Standard.png` - Base floorplan
+2. `Living 1.png` - Living zone overlay
+3. `Master 1.png` - Master zone overlay
+4. `Family 1.png` - Family zone overlay
 
-Or update the image paths in `/pages/pdf-test.js` to match your file names.
+The base floorplan will display at full opacity, and the overlays will stack on top to create the complete floorplan.
 
 ## Testing:
 After adding images, visit http://localhost:3000/pdf-test to test the PDF compiler.

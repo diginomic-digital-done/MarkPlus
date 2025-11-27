@@ -1,8 +1,9 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { usePDF } from 'react-to-pdf';
 
 export default function PDFTest() {
   const targetRef = useRef();
+  const [overlayOpacity, setOverlayOpacity] = useState(1.0);
 
   // Configure react-to-pdf
   const { toPDF, targetRef: pdfRef } = usePDF({
@@ -10,12 +11,12 @@ export default function PDFTest() {
     page: { margin: 10 }
   });
 
-  // Your 4 PNG images - update these paths after you add your images to /public/testimages/
+  // Your 4 PNG images - base floorplan + 3 overlay layers
   const images = [
-    '/testimages/layer1.png',
-    '/testimages/layer2.png',
-    '/testimages/layer3.png',
-    '/testimages/layer4.png'
+    '/testimages/0 Standard.png',      // Base floorplan
+    '/testimages/Living 1.png',        // Living zone overlay
+    '/testimages/Master 1.png',        // Master zone overlay
+    '/testimages/Family 1.png'         // Family zone overlay
   ];
 
   // Alternative: Use existing sample images (remove the comment to use these instead)
@@ -35,18 +36,31 @@ export default function PDFTest() {
           <h2 className="text-xl font-semibold mb-4">Instructions:</h2>
           <ol className="list-decimal list-inside space-y-2 text-gray-700">
             <li><strong>Add your 4 PNG images</strong> to <code className="bg-gray-100 px-2 py-1 rounded">/public/testimages/</code> directory</li>
-            <li>Name them as: <code className="bg-gray-100 px-2 py-1 rounded">layer1.png</code>, <code className="bg-gray-100 px-2 py-1 rounded">layer2.png</code>, <code className="bg-gray-100 px-2 py-1 rounded">layer3.png</code>, <code className="bg-gray-100 px-2 py-1 rounded">layer4.png</code></li>
-            <li>Refresh this page to see your images overlaid</li>
+            <li>Expected files: <code className="bg-gray-100 px-2 py-1 rounded">0 Standard.png</code> (base), <code className="bg-gray-100 px-2 py-1 rounded">Living 1.png</code>, <code className="bg-gray-100 px-2 py-1 rounded">Master 1.png</code>, <code className="bg-gray-100 px-2 py-1 rounded">Family 1.png</code></li>
+            <li>Refresh this page to see your floorplan layers overlaid</li>
             <li>Click the "Generate PDF" button below to export as PDF</li>
-            <li>(Optional) Edit <code className="bg-gray-100 px-2 py-1 rounded">/pages/pdf-test.js</code> to customize opacity, positioning, or use different image paths</li>
+            <li>(Optional) Adjust opacity slider below to fine-tune layer visibility</li>
           </ol>
         </div>
 
         {/* Control Panel */}
         <div className="mb-6 bg-white p-6 rounded shadow">
+          <div className="flex items-center gap-6 mb-4">
+            <label className="text-sm font-semibold text-gray-700">Overlay Opacity:</label>
+            <input
+              type="range"
+              min="0"
+              max="1"
+              step="0.1"
+              value={overlayOpacity}
+              onChange={(e) => setOverlayOpacity(parseFloat(e.target.value))}
+              className="flex-1"
+            />
+            <span className="text-sm font-mono bg-gray-100 px-3 py-1 rounded">{overlayOpacity.toFixed(1)}</span>
+          </div>
           <button
             onClick={() => toPDF()}
-            className="bg-blue-600 text-white px-6 py-3 rounded font-semibold hover:bg-blue-700 transition"
+            className="bg-blue-600 text-white px-6 py-3 rounded font-semibold hover:bg-blue-700 transition w-full"
           >
             Generate PDF
           </button>
@@ -57,7 +71,7 @@ export default function PDFTest() {
           <h2 className="text-xl font-semibold mb-4">Preview (This will be in the PDF):</h2>
 
           <div ref={pdfRef} className="border-2 border-gray-300 p-8">
-            <h3 className="text-2xl font-bold mb-6 text-center">Overlaid Images</h3>
+            <h3 className="text-2xl font-bold mb-6 text-center">Complete Floorplan</h3>
 
             {/* Overlay Container */}
             <div className="relative w-full" style={{ height: '600px', margin: '0 auto', maxWidth: '800px' }}>
@@ -65,10 +79,10 @@ export default function PDFTest() {
                 <img
                   key={index}
                   src={img}
-                  alt={`Layer ${index + 1}`}
+                  alt={index === 0 ? 'Base Floorplan' : `${img.split('/').pop().split('.')[0]} Overlay`}
                   className="absolute top-0 left-0 w-full h-full object-contain"
                   style={{
-                    opacity: 0.7, // Make layers semi-transparent so you can see them all
+                    opacity: index === 0 ? 1.0 : overlayOpacity, // Base at full opacity, overlays controlled by slider
                     zIndex: index
                   }}
                 />
@@ -77,10 +91,18 @@ export default function PDFTest() {
 
             {/* Image List */}
             <div className="mt-8">
-              <h4 className="text-lg font-semibold mb-2">Images Used:</h4>
-              <ul className="list-decimal list-inside space-y-1 text-sm text-gray-600">
+              <h4 className="text-lg font-semibold mb-2">Layers:</h4>
+              <ul className="list-none space-y-1 text-sm text-gray-600">
                 {images.map((img, index) => (
-                  <li key={index}>{img}</li>
+                  <li key={index} className="flex items-center gap-2">
+                    <span className="font-mono bg-gray-100 px-2 py-1 rounded text-xs">
+                      {index === 0 ? 'BASE' : `LAYER ${index}`}
+                    </span>
+                    <span>{img.split('/').pop()}</span>
+                    <span className="text-xs text-gray-400">
+                      (opacity: {index === 0 ? '100%' : `${(overlayOpacity * 100).toFixed(0)}%`})
+                    </span>
+                  </li>
                 ))}
               </ul>
             </div>
