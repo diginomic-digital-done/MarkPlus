@@ -39,3 +39,7 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Test images and generated PDFs
+/public/testimages/*.png
+/public/pdfs/floorplan-output.pdf

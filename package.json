@@ -7,6 +7,7 @@
     "build": "next build --turbopack",
     "start": "next start",
     "lint": "eslint",
+    "generate-pdf": "node scripts/generate-pdf.js",
     "prisma:generate": "prisma generate",
     "prisma:migrate": "prisma migrate dev",
     "prisma:studio": "prisma studio"
@@ -23,11 +24,13 @@
     "formidable": "^3.5.4",
     "next": "15.5.3",
     "node-fetch": "^3.3.2",
+    "pdfkit": "^0.17.2",
     "prisma": "^6.16.2",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "react-icons": "^5.5.0",
     "react-to-pdf": "^2.0.3",
+    "sharp": "^0.34.5",
     "swagger-jsdoc": "^6.2.8",
     "swagger-ui-express": "^5.0.1"
   },
