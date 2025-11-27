@@ -45,18 +45,23 @@ export default function PDFTest() {
         <div className="bg-white p-8 rounded shadow">
           <h2 className="text-xl font-semibold mb-4">Preview (This will be in the PDF):</h2>
 
-          <div ref={pdfRef} className="border-2 border-gray-300 p-8">
-            <h3 className="text-2xl font-bold mb-6 text-center">Complete Floorplan</h3>
+          <div ref={pdfRef} style={{ border: '2px solid #d1d5db', padding: '32px', backgroundColor: '#ffffff' }}>
+            <h3 style={{ fontSize: '24px', fontWeight: 'bold', marginBottom: '24px', textAlign: 'center', color: '#000000' }}>Complete Floorplan</h3>
 
             {/* Overlay Container */}
-            <div className="relative w-full" style={{ height: '600px', margin: '0 auto', maxWidth: '800px' }}>
+            <div style={{ position: 'relative', width: '100%', height: '600px', margin: '0 auto', maxWidth: '800px' }}>
               {images.map((img, index) => (
                 <img
                   key={index}
                   src={img}
                   alt={index === 0 ? 'Base Floorplan' : `${img.split('/').pop().split('.')[0]} Overlay`}
-                  className="absolute top-0 left-0 w-full h-full object-contain"
                   style={{
+                    position: 'absolute',
+                    top: 0,
+                    left: 0,
+                    width: '100%',
+                    height: '100%',
+                    objectFit: 'contain',
                     zIndex: index
                   }}
                 />
@@ -64,15 +69,15 @@ export default function PDFTest() {
             </div>
 
             {/* Image List */}
-            <div className="mt-8">
-              <h4 className="text-lg font-semibold mb-2">Layers:</h4>
-              <ul className="list-none space-y-1 text-sm text-gray-600">
+            <div style={{ marginTop: '32px' }}>
+              <h4 style={{ fontSize: '18px', fontWeight: '600', marginBottom: '8px', color: '#000000' }}>Layers:</h4>
+              <ul style={{ listStyle: 'none', padding: 0 }}>
                 {images.map((img, index) => (
-                  <li key={index} className="flex items-center gap-2">
-                    <span className="font-mono bg-gray-100 px-2 py-1 rounded text-xs">
+                  <li key={index} style={{ display: 'flex', alignItems: 'center', gap: '8px', marginBottom: '4px' }}>
+                    <span style={{ fontFamily: 'monospace', backgroundColor: '#f3f4f6', padding: '4px 8px', borderRadius: '4px', fontSize: '12px', color: '#000000' }}>
                       {index === 0 ? 'BASE' : `LAYER ${index}`}
                     </span>
-                    <span>{img.split('/').pop()}</span>
+                    <span style={{ color: '#000000' }}>{img.split('/').pop()}</span>
                   </li>
                 ))}
               </ul>
