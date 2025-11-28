@@ -69,25 +69,25 @@ model FloorPlan {
   floorPlanUrl    String?
   status          String
   pdfPagesOverride String[]
-  variationOptions VariationOption[]
+  variations      Variation[]
   pdfRequests PDFRequest[]
 }
 
 
-model VariationType {
+model Zone {
   id          Int      @id @default(autoincrement())
   name        String   @unique
   label       String
   isActive    Boolean  @default(true)
-  variationOptions VariationOption[]
+  variations  Variation[]
 }
 
-model VariationOption {
+model Variation {
   id          Int      @id @default(autoincrement())
   floorPlanId Int
   floorPlan   FloorPlan @relation(fields: [floorPlanId], references: [id])
-  variationTypeId Int
-  variationType VariationType @relation(fields: [variationTypeId], references: [id])
+  zoneId      Int
+  zone        Zone @relation(fields: [zoneId], references: [id])
   label       String
   description String?
   image       String?
