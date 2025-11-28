@@ -2,11 +2,6 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-console.log('Prisma Client:', prisma); // Log Prisma client instance
-console.log('Available Models:', Object.keys(prisma)); // Log available models in Prisma client
-console.log('Database connection status:', await prisma.$connect()); // Confirm database connection
-
-
 export default async function handler(req, res) {
   // No custom CORS middleware needed for Next.js API routes
 
@@ -80,17 +75,6 @@ export default async function handler(req, res) {
       break;
 
     case 'PUT':
-      try {
-        const { id, name, regionId, isActive } = req.body;
-        const updatedFloorPlan = await prisma.floorPlan.update({
-          where: { id },
-          data: { name, regionId, isActive },
-        });
-        res.status(200).json(updatedFloorPlan);
-      } catch (error) {
-        res.status(500).json({ error: 'Failed to update floor plan' });
-      }
-      break;
       try {
         const { id, title, regionId, frontage, areaLiving, areaTotal, basePrice, heroImage, gallery, brochurePdf, floorPlanUrl, status, pdfPagesOverride, bedrooms, bathrooms, carSpaces } = req.body;
         const updatedFloorPlan = await prisma.floorPlan.update({
